@@ -1,0 +1,16 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let question of questions" class="form-row">
+      <app-dynamic-form-question
+        [question]="question"
+        [form]="form"
+      ></app-dynamic-form-question>
+    </div>
+    <br />
+    <div class="form-row">
+      <button type="submit" style="cursor: pointer" [disabled]="!form.valid">
+        Ajouter
+      </button>
+    </div>
+  </form>
+</div>

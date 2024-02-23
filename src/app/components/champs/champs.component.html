@@ -1,0 +1,13 @@
+@switch (temoin) { @case (0) {
+<app-dynamic-form
+  [questions]="questions1 | async"
+  [Choix]="Choix"
+></app-dynamic-form>
+
+} @case (1) {
+<app-dynamic-form
+  [questions]="questions2 | async"
+  [Choix]="Choix"
+></app-dynamic-form>
+
+} }
