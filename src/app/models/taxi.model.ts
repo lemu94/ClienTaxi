@@ -1,5 +1,6 @@
 export interface Taxi {
-  IdTaxi?: number;
-  NomTaxi: string;
-  CouleurTaxi: string;
+  idTaxi?: number;
+  nomTaxi: string;
+  couleurTaxi: string;
+  commandes?: Array<any>;
 }

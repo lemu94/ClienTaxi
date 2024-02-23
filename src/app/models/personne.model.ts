@@ -1,5 +1,5 @@
 export interface Personne {
-  IdPers: number;
+  IdPers?: number;
   NomPers: string;
   PrenomPers: string;
   AgePers: number;

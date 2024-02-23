@@ -19,6 +19,7 @@ export class ChampsComponent implements OnChanges {
   constructor(public service: QuestionService) {
     this.questions1 = this.service.getQuestionsPers();
     this.questions2 = this.service.getQuestionsTaxi();
+    this.questions3 = this.service.getQuestionComm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

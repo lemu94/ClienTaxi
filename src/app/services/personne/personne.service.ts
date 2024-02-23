@@ -21,7 +21,11 @@ export class PersonneService {
 
     return this.http
       .post<Personne>(EndPoint, formData)
-      .pipe(catchError((error) => handleError(error, 'Ajouter personne')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Ajouter personne', data: Data })
+        )
+      );
   }
 
   public ListePersonne(): Observable<Personne[]> {
@@ -29,7 +33,9 @@ export class PersonneService {
 
     return this.http
       .get<Personne[]>(EndPoint)
-      .pipe(catchError((error) => handleError(error, 'Liste personne')));
+      .pipe(
+        catchError((error) => handleError(error, { action: 'Liste personne' }))
+      );
   }
 
   public SupprimerPersonne(IdPers: number): Observable<Boolean> {
@@ -37,7 +43,11 @@ export class PersonneService {
 
     return this.http
       .delete<boolean>(EndPoint)
-      .pipe(catchError((error) => handleError(error, 'Supprimer personne')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Supprimer personne', data: IdPers })
+        )
+      );
   }
 
   public AffichePersonne(IdPers: number): Observable<Personne> {
@@ -45,7 +55,11 @@ export class PersonneService {
 
     return this.http
       .get<Personne>(EndPoint)
-      .pipe(catchError((error) => handleError(error, 'Affiche personne')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Affiche personne', data: IdPers })
+        )
+      );
   }
 
   public ModifierPersonne(Data: Personne): Observable<boolean> {
@@ -58,6 +72,10 @@ export class PersonneService {
 
     return this.http
       .patch<boolean>(EndPoint, formData)
-      .pipe(catchError((error) => handleError(error, 'Modifier personne')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Modifier personne', data: Data })
+        )
+      );
   }
 }

@@ -1,6 +1,6 @@
 export interface Commande {
-  IdCom: number;
-  IdTaxi: number;
-  IdPers: number;
-  DateComm: Date;
+  idCom?: number;
+  idTaxi: number;
+  idPers: number;
+  dateComm: Date;
 }

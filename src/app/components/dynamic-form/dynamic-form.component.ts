@@ -2,9 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { QuestionBase } from '../../shared/dynaminc_form/question.model';
 import { FormGroup } from '@angular/forms';
 import { QuestionControlService } from '../../shared/dynaminc_form/question-control.service';
-import { Menu } from '../../../config/config';
+import { Menu, TypeMessage } from '../../../config/config';
 import { TaxiService } from '../../services/taxi/taxi.service';
 import { Taxi } from '../../models/taxi.model';
+import { notification } from '../../services/config.service';
+import { PersonneService } from '../../services/personne/personne.service';
+import { Personne } from '../../models/personne.model';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -19,25 +22,41 @@ export class DynamicFormComponent implements OnInit {
 
   constructor(
     private qcs: QuestionControlService,
-    private TaxiService: TaxiService
+    private TaxiService: TaxiService,
+    private PersonneService: PersonneService
   ) {}
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
 
-  listData() {}
-
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.getRawValue());
     this.payLoad = JSON.parse(this.payLoad);
     switch (this.Choix) {
       case Menu.Personne:
-        // this.temoin = 0;
+        this.PersonneService.AjouterPersonne(
+          this.payLoad as Personne
+        ).subscribe({
+          next: (data) => {
+            if (data == null) {
+              notification(TypeMessage.ADD_ERROR);
+            } else {
+              notification(TypeMessage.ADD_SUCCESS);
+            }
+          },
+          error: (err) => console.error(err),
+        });
         break;
       case Menu.Taxi:
         this.TaxiService.AjouterTaxi(this.payLoad as Taxi).subscribe({
-          next: () => this.form.reset(),
+          next: (data) => {
+            if (data == null) {
+              notification(TypeMessage.ADD_ERROR);
+            } else {
+              notification(TypeMessage.ADD_SUCCESS);
+            }
+          },
           error: (err) => console.error(err),
         });
         break;

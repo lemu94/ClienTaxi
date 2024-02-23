@@ -20,45 +20,63 @@ export class TaxiService implements ITaxiService {
 
   public AjouterTaxi(Data: Taxi): Observable<Taxi> {
     let formData = new FormData();
-    formData.append('couleurTaxi', Data.CouleurTaxi);
-    formData.append('nomTaxi', Data.NomTaxi);
+    formData.append('couleurTaxi', Data.couleurTaxi);
+    formData.append('nomTaxi', Data.nomTaxi);
     let Endpoint = url_api + TaxiApi.AjouterTaxi;
 
     return this.http
       .post<Taxi>(Endpoint, formData)
-      .pipe(catchError((error) => handleError(error, 'Ajouter Taxi')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Ajouter Taxi', data: Data })
+        )
+      );
   }
 
   public ListeTaxi(): Observable<Taxi[]> {
     let EndPoint = url_api + TaxiApi.ListeTaxi;
     return this.http
       .get<Taxi[]>(EndPoint)
-      .pipe(catchError((error) => handleError(error, 'Liste Taxi')));
+      .pipe(
+        catchError((error) => handleError(error, { action: 'Liste Taxi' }))
+      );
   }
 
   public SupprimerTaxi(IdTaxi: number): Observable<boolean> {
     let EndPoint = url_api + TaxiApi.SupprimerTaxi;
     return this.http
       .delete<boolean>(EndPoint + '/' + IdTaxi)
-      .pipe(catchError((error) => handleError(error, 'Supprimer Taxi')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Supprimer Taxi', data: IdTaxi })
+        )
+      );
   }
 
   public ModifierTaxi(Data: Taxi): Observable<boolean> {
     let formData = new FormData();
-    formData.append('idTaxi', String(Data.IdTaxi));
-    formData.append('nomTaxi', Data.NomTaxi);
-    formData.append('couleurTaxi', Data.CouleurTaxi);
+    formData.append('idTaxi', String(Data.idTaxi));
+    formData.append('nomTaxi', Data.nomTaxi);
+    formData.append('couleurTaxi', Data.couleurTaxi);
     let postEndpoint = url_api + TaxiApi.ModifierTaxi;
 
     return this.http
       .patch<boolean>(postEndpoint, formData)
-      .pipe(catchError((error) => handleError(error, 'Modifier Taxi')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Modifier Taxi', data: Data })
+        )
+      );
   }
 
   public AfficheTaxi(IdTaxi: number): Observable<Taxi> {
     let EndPoint = url_api + TaxiApi.AfficheTaxi + '?IdTaxi=' + IdTaxi;
     return this.http
       .get<Taxi>(EndPoint)
-      .pipe(catchError((error) => handleError(error, 'Affiche Taxi')));
+      .pipe(
+        catchError((error) =>
+          handleError(error, { action: 'Afficher Taxi', data: IdTaxi })
+        )
+      );
   }
 }

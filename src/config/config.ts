@@ -17,9 +17,22 @@ export class TaxiApi {
   static readonly SupprimerPersonne = '/api/Personne/';
   static readonly AjouterPersonne = '/api/Personne/Ajouter';
 
-  static readonly AfficheCommande = '';
-  static readonly ListeCommande = '';
-  static readonly ModifierCommande = '';
-  static readonly SupprimerCommande = '';
-  static readonly AjouterCommande = '';
+  static readonly AfficheCommande = '/api/Commande';
+  static readonly ListeCommande = '/api/Commande/Liste';
+  static readonly ModifierCommande = '/api/Commande/Modifier';
+  static readonly SupprimerCommande = '/api/Commande/';
+  static readonly AjouterCommande = '/api/Commande/Ajouter';
+}
+
+export enum TypeMessage {
+  ADD_SUCCESS,
+  ADD_ERROR,
+  UPD_SUCCESS,
+  UPD_ERROR,
+  DEL_SUCCESS,
+  DEL_ERROR,
+}
+export interface Action {
+  action: string;
+  data?: any;
 }
