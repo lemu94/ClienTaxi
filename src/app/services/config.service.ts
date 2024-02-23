@@ -1,15 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
-export function handleError(error: HttpErrorResponse) {
+export function handleError(error: HttpErrorResponse, action: string) {
   if (error.status === 0) {
     // A client-side or network error occurred. Handle it accordingly.
-    console.error('An error occurred:', error.error);
+    console.error('An error occurred: ' + action, error.error);
   } else {
     // The backend returned an unsuccessful response code.
     // The response body may contain clues as to what went wrong.
     console.error(
-      `Backend returned code ${error.status}, body was: `,
+      `Backend returned code ${error.status}, action was ${action} , body was: `,
       error.error
     );
   }
