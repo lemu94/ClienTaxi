@@ -22,6 +22,7 @@ export class QuestionService {
           { key: 'unproven', value: 'Unproven' },
         ],
         order: 1,
+        required: true,
       }),
 
       new DropdownQuestion({
@@ -34,6 +35,7 @@ export class QuestionService {
           { key: 'unproven', value: 'Unproven' },
         ],
         order: 2,
+        required: true,
       }),
     ];
     return of(questions.sort((a, b) => a.order - b.order));

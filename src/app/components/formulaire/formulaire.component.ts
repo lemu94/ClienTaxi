@@ -1,11 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Action } from '../../../config/config';
 
 @Component({
   selector: 'app-formulaire',
   templateUrl: './formulaire.component.html',
   styleUrl: './formulaire.component.scss',
 })
-export class FormulaireComponent {
+export class FormulaireComponent implements OnChanges {
   @Input() Choix = '';
-  constructor() {}
+  datas: any[] = [];
+  constructor(private Store: Store<{ appState: Action }>) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.Store.select('appState').subscribe((donnees) => {
+      this.datas = donnees.data.data;
+    });
+  }
 }

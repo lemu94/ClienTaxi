@@ -1,8 +1,8 @@
 export let url_api: string = 'https://localhost:7117';
 export enum Menu {
-  'Personne' = 'Personne',
-  'Taxi' = 'Taxi',
-  'Commande' = 'Commande',
+  Personne = 'Personne',
+  Taxi = 'Taxi',
+  Commande = 'Commande',
 }
 export class TaxiApi {
   static readonly AfficheTaxi = '/api/Taxi';

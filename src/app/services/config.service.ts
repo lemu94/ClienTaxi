@@ -35,7 +35,7 @@ export function notification(type: TypeMessage) {
       Swal.fire({
         icon: 'success',
         title: 'Confirmation',
-        text: 'Ajout Echoué',
+        text: 'Ajout effectué',
       });
       break;
     case TypeMessage.ADD_ERROR:
@@ -77,4 +77,10 @@ export function notification(type: TypeMessage) {
       // Logique à exécuter si aucun des cas précédents ne correspond à la valeur de choix
       break;
   }
+}
+
+export interface DataDTO {
+  id?: number;
+  libelle: string | Date;
+  action?: string;
 }

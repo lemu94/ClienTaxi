@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { Taxi } from '../../models/taxi.model';
 import { TaxiApi, url_api } from '../../../config/config';
-import { handleError } from '../config.service';
+import { DataDTO, handleError } from '../config.service';
 
 interface ITaxiService {
   AjouterTaxi(Data: Taxi): Observable<Taxi>;
-  ListeTaxi(): Observable<Taxi[]>;
+  ListeTaxi(): Observable<DataDTO[]>;
   SupprimerTaxi(IdTaxi: number): Observable<boolean>;
   ModifierTaxi(Data: Taxi): Observable<boolean>;
 }
@@ -33,13 +33,19 @@ export class TaxiService implements ITaxiService {
       );
   }
 
-  public ListeTaxi(): Observable<Taxi[]> {
+  public ListeTaxi(): Observable<DataDTO[]> {
     let EndPoint = url_api + TaxiApi.ListeTaxi;
-    return this.http
-      .get<Taxi[]>(EndPoint)
-      .pipe(
-        catchError((error) => handleError(error, { action: 'Liste Taxi' }))
-      );
+    return this.http.get<Taxi[]>(EndPoint).pipe(
+      map((taxis: Taxi[]) => {
+        return taxis.map((taxi) => {
+          return {
+            id: taxi.idTaxi,
+            libelle: taxi.nomTaxi + ' - ' + taxi.couleurTaxi,
+          };
+        });
+      }),
+      catchError((error) => handleError(error, { action: 'Liste Taxi' }))
+    );
   }
 
   public SupprimerTaxi(IdTaxi: number): Observable<boolean> {
@@ -69,14 +75,18 @@ export class TaxiService implements ITaxiService {
       );
   }
 
-  public AfficheTaxi(IdTaxi: number): Observable<Taxi> {
+  public AfficheTaxi(IdTaxi: number): Observable<DataDTO> {
     let EndPoint = url_api + TaxiApi.AfficheTaxi + '?IdTaxi=' + IdTaxi;
-    return this.http
-      .get<Taxi>(EndPoint)
-      .pipe(
-        catchError((error) =>
-          handleError(error, { action: 'Afficher Taxi', data: IdTaxi })
-        )
-      );
+    return this.http.get<Taxi>(EndPoint).pipe(
+      map((taxi: Taxi) => {
+        return {
+          id: taxi.idTaxi,
+          libelle: taxi.nomTaxi + ' - ' + taxi.couleurTaxi,
+        };
+      }),
+      catchError((error) =>
+        handleError(error, { action: 'Afficher Taxi', data: IdTaxi })
+      )
+    );
   }
 }

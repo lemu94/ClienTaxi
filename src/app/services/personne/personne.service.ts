@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { Personne } from '../../models/personne.model';
 import { TaxiApi, url_api } from '../../../config/config';
 
-import { handleError } from '../config.service';
+import { DataDTO, handleError } from '../config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,30 +12,40 @@ import { handleError } from '../config.service';
 export class PersonneService {
   constructor(private http: HttpClient) {}
 
-  public AjouterPersonne(Data: Personne): Observable<Personne> {
+  public AjouterPersonne(Data: Personne): Observable<DataDTO> {
     let formData = new FormData();
     formData.append('nomPers', Data.NomPers);
     formData.append('prenomPers', Data.PrenomPers);
     formData.append('agePers', String(Data.AgePers));
     let EndPoint = url_api + TaxiApi.AjouterPersonne;
 
-    return this.http
-      .post<Personne>(EndPoint, formData)
-      .pipe(
-        catchError((error) =>
-          handleError(error, { action: 'Ajouter personne', data: Data })
-        )
-      );
+    return this.http.post<Personne>(EndPoint, formData).pipe(
+      map((personne: Personne) => {
+        return {
+          id: personne.IdPers,
+          libelle: personne.NomPers,
+        };
+      }),
+      catchError((error) =>
+        handleError(error, { action: 'Ajouter personne', data: Data })
+      )
+    );
   }
 
-  public ListePersonne(): Observable<Personne[]> {
+  public ListePersonne(): Observable<DataDTO[]> {
     let EndPoint = url_api + TaxiApi.ListePersonne;
 
-    return this.http
-      .get<Personne[]>(EndPoint)
-      .pipe(
-        catchError((error) => handleError(error, { action: 'Liste personne' }))
-      );
+    return this.http.get<Personne[]>(EndPoint).pipe(
+      map((personnes: Personne[]) => {
+        return personnes.map((personne) => {
+          return {
+            id: personne.IdPers,
+            libelle: personne.NomPers + ' - ' + personne.PrenomPers,
+          };
+        });
+      }),
+      catchError((error) => handleError(error, { action: 'Liste personne' }))
+    );
   }
 
   public SupprimerPersonne(IdPers: number): Observable<Boolean> {
@@ -50,16 +60,20 @@ export class PersonneService {
       );
   }
 
-  public AffichePersonne(IdPers: number): Observable<Personne> {
+  public AffichePersonne(IdPers: number): Observable<DataDTO> {
     let EndPoint = url_api + TaxiApi.AffichePersonne + '?IdPers=' + IdPers;
 
-    return this.http
-      .get<Personne>(EndPoint)
-      .pipe(
-        catchError((error) =>
-          handleError(error, { action: 'Affiche personne', data: IdPers })
-        )
-      );
+    return this.http.get<Personne>(EndPoint).pipe(
+      map((personne: Personne) => {
+        return {
+          id: personne.IdPers,
+          libelle: personne.NomPers,
+        };
+      }),
+      catchError((error) =>
+        handleError(error, { action: 'Affiche personne', data: IdPers })
+      )
+    );
   }
 
   public ModifierPersonne(Data: Personne): Observable<boolean> {

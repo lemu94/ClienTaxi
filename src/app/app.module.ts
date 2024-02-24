@@ -24,6 +24,10 @@ import {
 import { TaxiService } from './services/taxi/taxi.service';
 import { PersonneService } from './services/personne/personne.service';
 import { CommandeService } from './services/commande/commande.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './shared/state/apptaxi.effects';
+import { AppReducer } from './shared/state/apptaxi.reducers';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import { CommandeService } from './services/commande/commande.service';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    EffectsModule.forRoot(AppEffects),
+    StoreModule.forRoot({ appState: AppReducer }),
   ],
   providers: [
     provideClientHydration(),

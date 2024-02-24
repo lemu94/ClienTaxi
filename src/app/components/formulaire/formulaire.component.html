@@ -4,6 +4,10 @@
   <hr />
 
   <ul class="todos">
-    <app-element></app-element>
+    @for (item of datas ; track $index) {
+    <app-element [element]="item"></app-element>
+    } @empty {
+    <li>Aucune Liste</li>
+    }
   </ul>
 </div>
