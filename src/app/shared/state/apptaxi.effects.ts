@@ -6,6 +6,8 @@ import { AppActions } from './apptaxi.action';
 import { TaxiService } from '../../services/taxi/taxi.service';
 import { PersonneService } from '../../services/personne/personne.service';
 import { CommandeService } from '../../services/commande/commande.service';
+import { notification } from '../../services/config.service';
+import { TypeMessage } from '../../../config/config';
 
 @Injectable()
 export class AppEffects {
@@ -57,6 +59,60 @@ export class AppEffects {
           catchError((error) => of(AppActions.errorLoad({ data: error }))),
           tap(() => {
             console.log('get load Commandes Finished');
+          })
+        );
+      })
+    )
+  );
+
+  addTaxis = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.addTaxi),
+      tap(() => {
+        console.log('newrequest load  in queue');
+      }),
+      mergeMap((action) => {
+        return this.taxiService.AjouterTaxi(action.data).pipe(
+          map((res) => AppActions.loadTaxis()),
+          catchError((error) => of(AppActions.errorLoad({ data: error }))),
+          tap(() => {
+            notification(TypeMessage.ADD_SUCCESS);
+          })
+        );
+      })
+    )
+  );
+
+  addPersonne = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.addPersonne),
+      tap(() => {
+        console.log('newrequest load in queue');
+      }),
+      mergeMap((action) => {
+        return this.personneService.AjouterPersonne(action.data).pipe(
+          map((res) => AppActions.loadPersonnes()),
+          catchError((error) => of(AppActions.errorLoad({ data: error }))),
+          tap(() => {
+            notification(TypeMessage.ADD_SUCCESS);
+          })
+        );
+      })
+    )
+  );
+
+  addCommande = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.addCommande),
+      tap(() => {
+        console.log('newrequest load in queue');
+      }),
+      mergeMap((action) => {
+        return this.commandeService.AjouterCommande(action.data).pipe(
+          map((res) => AppActions.loadCommandes()),
+          catchError((error) => of(AppActions.errorLoad({ data: error }))),
+          tap(() => {
+            notification(TypeMessage.ADD_SUCCESS);
           })
         );
       })
