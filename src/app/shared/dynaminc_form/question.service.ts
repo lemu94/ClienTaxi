@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { DropdownQuestion } from './question-dropdown';
 
 import { TextboxQuestion } from './question-textbox';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { QuestionBase } from './question.model';
+import { Menu } from '../../../config/config';
 
 @Injectable()
 export class QuestionService {
   // TODO: get from a remote source of question metadata
 
-  getQuestionComm() {
+  private getQuestionComm() {
     const questions: QuestionBase<string>[] = [
       new DropdownQuestion({
         key: 'idPers',
@@ -41,7 +42,7 @@ export class QuestionService {
     return of(questions.sort((a, b) => a.order - b.order));
   }
 
-  getQuestionsPers() {
+  private getQuestionsPers() {
     const questions: QuestionBase<string>[] = [
       new TextboxQuestion({
         key: 'NomPers',
@@ -71,7 +72,7 @@ export class QuestionService {
 
     return of(questions.sort((a, b) => a.order - b.order));
   }
-  getQuestionsTaxi() {
+  private getQuestionsTaxi() {
     const questions: QuestionBase<string>[] = [
       new TextboxQuestion({
         key: 'nomTaxi',
@@ -93,5 +94,20 @@ export class QuestionService {
     ];
 
     return of(questions.sort((a, b) => a.order - b.order));
+  }
+
+  public choixQuestion(choix: Menu): Observable<QuestionBase<string>[]> {
+    switch (choix) {
+      case Menu.Personne:
+        return this.getQuestionsPers();
+        break;
+      case Menu.Taxi:
+        return this.getQuestionsTaxi();
+        break;
+      case Menu.Commande:
+        // Logique à exécuter lorsque choix est 'Commande'
+        return this.getQuestionComm();
+        break;
+    }
   }
 }

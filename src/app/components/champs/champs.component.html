@@ -1,18 +1,18 @@
-@switch (temoin) { @case (0) {
+@switch (Choix) { @case ('Taxi') {
 <app-dynamic-form
-  [questions]="questions1 | async"
+  [questions]="questionsTaxi | async"
   [Choix]="Choix"
 ></app-dynamic-form>
 
-} @case (1) {
+} @case ('Personne') {
 <app-dynamic-form
-  [questions]="questions2 | async"
+  [questions]="questionsPers | async"
   [Choix]="Choix"
 ></app-dynamic-form>
 
-} @case (2) {
+} @case ('Commande') {
 <app-dynamic-form
-  [questions]="questions3 | async"
+  [questions]="questionsComm | async"
   [Choix]="Choix"
 ></app-dynamic-form>
 

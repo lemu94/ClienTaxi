@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Action } from '../../../config/config';
+import { Action, Menu } from '../../../config/config';
 
 @Component({
   selector: 'app-formulaire',
@@ -8,7 +8,7 @@ import { Action } from '../../../config/config';
   styleUrl: './formulaire.component.scss',
 })
 export class FormulaireComponent implements OnChanges {
-  @Input() Choix = '';
+  @Input() Choix!: Menu;
   datas: any[] = [];
   constructor(private Store: Store<{ appState: Action }>) {}
 

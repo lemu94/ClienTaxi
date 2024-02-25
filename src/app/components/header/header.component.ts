@@ -8,11 +8,11 @@ import { AppActions } from '../../shared/state/apptaxi.action';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  @Output() Titre: EventEmitter<string> = new EventEmitter();
-  menuItems: string[] = Object.values(Menu);
+  @Output() Titre: EventEmitter<Menu> = new EventEmitter();
+  menuItems: Menu[] = Object.values(Menu);
   constructor(private store: Store) {}
 
-  lien(titre: string) {
+  lien(titre: Menu) {
     this.Titre.emit(titre);
     switch (titre) {
       case Menu.Personne:

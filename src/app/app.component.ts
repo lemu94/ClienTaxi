@@ -8,10 +8,10 @@ import { Menu } from '../config/config';
 })
 export class AppComponent {
   title = 'ClienTaxi';
-  TitreFormulaire: string = Menu.Taxi;
+  TitreFormulaire: Menu = Menu.Taxi;
   constructor() {}
 
-  recup(titre: string) {
+  recup(titre: Menu) {
     this.TitreFormulaire = titre;
   }
 }
