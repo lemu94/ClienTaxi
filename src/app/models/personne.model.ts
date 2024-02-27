@@ -1,6 +1,7 @@
 export interface Personne {
-  IdPers?: number;
-  NomPers: string;
-  PrenomPers: string;
-  AgePers: number;
+  idPers?: number;
+  nomPers: string;
+  prenomPers: string;
+  agePers: number;
+  commandes?: Array<any>;
 }

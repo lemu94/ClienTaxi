@@ -14,16 +14,16 @@ export class PersonneService {
 
   public AjouterPersonne(Data: Personne): Observable<DataDTO> {
     let formData = new FormData();
-    formData.append('nomPers', Data.NomPers);
-    formData.append('prenomPers', Data.PrenomPers);
-    formData.append('agePers', String(Data.AgePers));
+    formData.append('nomPers', Data.nomPers);
+    formData.append('prenomPers', Data.prenomPers);
+    formData.append('agePers', String(Data.agePers));
     let EndPoint = url_api + TaxiApi.AjouterPersonne;
 
     return this.http.post<Personne>(EndPoint, formData).pipe(
       map((personne: Personne) => {
         return {
-          id: personne.IdPers,
-          libelle: personne.NomPers,
+          id: personne.idPers,
+          libelle: personne.nomPers,
         };
       }),
       catchError((error) =>
@@ -39,8 +39,8 @@ export class PersonneService {
       map((personnes: Personne[]) => {
         return personnes.map((personne) => {
           return {
-            id: personne.IdPers,
-            libelle: personne.NomPers + ' - ' + personne.PrenomPers,
+            id: personne.idPers,
+            libelle: personne.nomPers + ' - ' + personne.prenomPers,
           };
         });
       }),
@@ -66,8 +66,8 @@ export class PersonneService {
     return this.http.get<Personne>(EndPoint).pipe(
       map((personne: Personne) => {
         return {
-          id: personne.IdPers,
-          libelle: personne.NomPers,
+          id: personne.idPers,
+          libelle: personne.nomPers,
         };
       }),
       catchError((error) =>
@@ -78,9 +78,9 @@ export class PersonneService {
 
   public ModifierPersonne(Data: Personne): Observable<boolean> {
     let formData = new FormData();
-    formData.append('IdPers', String(Data.IdPers));
-    formData.append('NomPers', Data.NomPers);
-    formData.append('PrenomPers', Data.PrenomPers);
+    formData.append('IdPers', String(Data.idPers));
+    formData.append('NomPers', Data.nomPers);
+    formData.append('PrenomPers', Data.prenomPers);
 
     let EndPoint = url_api + TaxiApi.ModifierPersonne;
 

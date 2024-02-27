@@ -105,7 +105,6 @@ export class QuestionService {
         return this.getQuestionsTaxi();
         break;
       case Menu.Commande:
-        // Logique à exécuter lorsque choix est 'Commande'
         return this.getQuestionComm();
         break;
     }
