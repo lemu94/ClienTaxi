@@ -4,11 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Used Tech.
 
-@for
-State Management Ngrx
-ReactiveForms
-DynamicForms
-Dependances Injections -- Services
+- @for @If
+- State Management Ngrx
+- ReactiveForms
+- DynamicForms
+- Dependances Injections -- Services
 
 # Image
 
