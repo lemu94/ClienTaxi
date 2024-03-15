@@ -9,6 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - ReactiveForms
 - DynamicForms
 - Dependances Injections -- Services
+- Backend : ASP.NET CORE / ORM : EF CORE
 
 # Image
 
