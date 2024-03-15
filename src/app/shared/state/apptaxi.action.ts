@@ -1,8 +1,9 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Taxi } from '../../models/taxi.model';
-import { DataDTO } from '../../services/config.service';
-import { Commande } from '../../models/commande.model';
-import { Personne } from '../../models/personne.model';
+import { Taxi } from '../models/taxi.model';
+
+import { Commande } from '../models/commande.model';
+import { Personne } from '../models/personne.model';
+import { DataDTO } from '../services/config.service';
 
 export const AppActions = createActionGroup({
   source: 'APP',

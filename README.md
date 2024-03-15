@@ -8,3 +8,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 State Management Ngrx
 ReactiveForms
 DynamicForms
+Dependances Injections -- Services
+
+# Image
+
+![alt text](image.png)

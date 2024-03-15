@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Taxi } from '../../models/taxi.model';
-import { Commande } from '../../models/commande.model';
-import { DataDTO } from '../../services/config.service';
+
+import { DataDTO } from '../../shared/services/config.service';
 
 @Component({
   selector: 'app-element',

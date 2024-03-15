@@ -3,11 +3,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, tap, mergeMap } from 'rxjs/operators';
 import { AppActions } from './apptaxi.action';
-import { TaxiService } from '../../services/taxi/taxi.service';
-import { PersonneService } from '../../services/personne/personne.service';
-import { CommandeService } from '../../services/commande/commande.service';
-import { notification } from '../../services/config.service';
+
 import { TypeMessage } from '../../../config/config';
+import { CommandeService } from '../services/commande/commande.service';
+import { notification } from '../services/config.service';
+import { PersonneService } from '../services/personne/personne.service';
+import { TaxiService } from '../services/taxi/taxi.service';
 
 @Injectable()
 export class AppEffects {

@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { Action, TypeMessage } from '../../config/config';
+
 import Swal from 'sweetalert2';
+import { Action, TypeMessage } from '../../../config/config';
 
 export function handleError(error: HttpErrorResponse, action: Action) {
   if (error.status === 0) {

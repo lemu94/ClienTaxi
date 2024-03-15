@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { QuestionBase } from '../../shared/dynaminc_form/question.model';
 import { FormGroup } from '@angular/forms';
 

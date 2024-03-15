@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Commande } from '../../models/commande.model';
+
 import { Observable, catchError, map } from 'rxjs';
-import { TaxiApi, url_api } from '../../../config/config';
+
 import { DataDTO, handleError } from '../config.service';
+import { url_api, TaxiApi } from '../../../../config/config';
+import { Commande } from '../../models/commande.model';
 
 @Injectable({
   providedIn: 'root',

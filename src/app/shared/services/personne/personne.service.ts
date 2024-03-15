@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map } from 'rxjs';
-import { Personne } from '../../models/personne.model';
-import { TaxiApi, url_api } from '../../../config/config';
 
 import { DataDTO, handleError } from '../config.service';
+import { url_api, TaxiApi } from '../../../../config/config';
+import { Personne } from '../../models/personne.model';
 
 @Injectable({
   providedIn: 'root',

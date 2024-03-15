@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map } from 'rxjs';
-import { Taxi } from '../../models/taxi.model';
-import { TaxiApi, url_api } from '../../../config/config';
+
 import { DataDTO, handleError } from '../config.service';
+import { url_api, TaxiApi } from '../../../../config/config';
+import { Taxi } from '../../models/taxi.model';
 
 interface ITaxiService {
   AjouterTaxi(Data: Taxi): Observable<Taxi>;

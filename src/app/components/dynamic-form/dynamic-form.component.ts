@@ -3,11 +3,11 @@ import { QuestionBase } from '../../shared/dynaminc_form/question.model';
 import { FormGroup } from '@angular/forms';
 import { QuestionControlService } from '../../shared/dynaminc_form/question-control.service';
 import { Menu } from '../../../config/config';
-import { Taxi } from '../../models/taxi.model';
-import { Personne } from '../../models/personne.model';
+import { Taxi } from '../../shared/models/taxi.model';
+import { Personne } from '../../shared/models/personne.model';
 import { Store } from '@ngrx/store';
 import { AppActions } from '../../shared/state/apptaxi.action';
-import { Commande } from '../../models/commande.model';
+import { Commande } from '../../shared/models/commande.model';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
